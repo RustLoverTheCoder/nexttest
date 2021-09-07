@@ -11,7 +11,7 @@ Amplify.configure({ ...awsExports, ssr: true });
 export async function getStaticPaths() {
   const SSR = withSSRContext();
   const { data } = await SSR.API.graphql({ query: listPosts });
-  const paths = data.listPosts.items.map((post) => ({
+  const paths = data.listPosts.items.map((post:any) => ({
     params: { id: post.id },
   }));
 
@@ -21,7 +21,7 @@ export async function getStaticPaths() {
   };
 }
 
-export async function getStaticProps({ params }) {
+export async function getStaticProps({ params }:any) {
   const SSR = withSSRContext();
   const { data } = await SSR.API.graphql({
     query: getPost,
@@ -37,7 +37,7 @@ export async function getStaticProps({ params }) {
   };
 }
 
-export default function Post({ post }) {
+export default function Post({ post }:any) {
   const router = useRouter();
 
   if (router.isFallback) {

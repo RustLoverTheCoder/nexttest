@@ -8,7 +8,7 @@ import styles from "../styles/Home.module.css";
 
 Amplify.configure({ ...awsExports, ssr: true });
 
-export async function getServerSideProps({ req }) {
+export async function getServerSideProps({ req }:{req:any}) {
   const SSR = withSSRContext({ req });
   const response = await SSR.API.graphql({ query: listPosts });
 
@@ -19,13 +19,13 @@ export async function getServerSideProps({ req }) {
   };
 }
 
-async function handleCreatePost(event) {
+async function handleCreatePost(event:any) {
   event.preventDefault();
 
   const form = new FormData(event.target);
 
   try {
-    const { data } = await API.graphql({
+    const { data }:any = await API.graphql({
       authMode: "AMAZON_COGNITO_USER_POOLS",
       query: createPost,
       variables: {
@@ -43,7 +43,7 @@ async function handleCreatePost(event) {
   }
 }
 
-export default function Home({ posts = [] }) {
+export default function Home({ posts = [] }:any) {
   return (
     <div className={styles.container}>
       <Head>
@@ -60,7 +60,7 @@ export default function Home({ posts = [] }) {
         </p>
 
         <div className={styles.grid}>
-          {posts.map((post) => (
+          {posts.map((post:any) => (
             <a className={styles.card} href={`/posts/${post.id}`} key={post.id}>
               <h3>{post.title}</h3>
               <p>{post.content}</p>
