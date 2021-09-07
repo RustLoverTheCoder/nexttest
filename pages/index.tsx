@@ -37,9 +37,8 @@ async function handleCreatePost(event:any) {
     });
 
     window.location.href = `/posts/${data.createPost.id}`;
-  } catch ({ errors }) {
-    console.error(...errors);
-    throw new Error(errors[0].message);
+  } catch (e) {
+    throw new Error('1');
   }
 }
 
